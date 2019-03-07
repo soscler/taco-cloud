@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/styles.css}" />
+    <!--link rel="stylesheet" href="../static.assets.css/styles.css" /-->
+
+</head>
+<body>
+    <form method="post" th:action="@{/orders}" th:object="${order}">
+        <h1>Order your taco creation!</h1>
+        <img th:src="@{/images/TacoCloud.Png}">
+        <a th:href="@{/design}" id="another">Design another taco</a><br/>
+
+        <div th:onerror="${#fields.hasErrors()}" th:if="${#fields.hasErrors()}">
+            <span th:class="ValidationError">
+                Please correct the errors below and resubmit.
+            </span>
+        </div>
+
+        <h3>Deliver my taco masterpiece to...</h3>
+        <label th:for="name">Name: </label>
+        <input type="text" th:field="*{name}" placeholder="Your name"/>
+        <br/>
+
+        <label th:for="stree">Street address: </label>
+        <input type="text" th:field="*{street}" placeholder="Street name"/>
+        <br/>
+
+        <label th:for="city">City: </label>
+        <input type="text" th:field="*{city}" placeholder="City name"/>
+        <br/>
+
+        <label th:for="state">State: </label>
+        <input type="text" th:field="*{state}" placeholder="Country or state name"/>
+        <br/>
+
+        <label th:for="zip">Zip code: </label>
+        <input type="text" th:field="*{zip}" placeholder="Zip code"/>
+        <br/>
+
+        <h3>Here's how I'll pay...</h3>
+        <label th:for="ccNumber">Credit card #: </label>
+        <input type="text" th:field="*{ccNumber}"/>
+        <br/>
+
+        <label th:for="ccExpiration">Expiration: </label>
+        <input type="text" th:field="*{ccExpiration}"/>
+        <br/>
+
+        <label th:for="ccCVV">CVV: </label>
+        <input type="text" th:field="*{ccCVV}"/>
+        <br/>
+
+        <input type="submit" value="Submit order" />
+
+    </form>
+</body>
+</html>
