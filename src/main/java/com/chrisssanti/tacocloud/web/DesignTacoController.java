@@ -1,6 +1,5 @@
 package com.chrisssanti.tacocloud.web;
 
-import com.chrisssanti.tacocloud.model.Design;
 import com.chrisssanti.tacocloud.model.Ingredient;
 import com.chrisssanti.tacocloud.model.Ingredient.Type;
 import com.chrisssanti.tacocloud.model.Taco;
@@ -57,12 +56,12 @@ public class DesignTacoController {
 
 
     @PostMapping
-    public String processDesign(@Valid Design design, Errors errors){
+    public String processDesign(@Valid Taco design, Errors errors){
         if(errors.hasErrors()){
             return "design";
         }
         //TODO save the taco design
-        log.info("Process design "+ design);
+        log.info("Process design: "+ design);
         return "redirect:/orders/current";
     }
 
