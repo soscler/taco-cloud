@@ -1,0 +1,19 @@
+h1{
+    background-color: aqua;
+}
+
+
+.ingredient-group{
+    display: grid;
+}
+
+
+#submit-design-button{
+    margin-top: 10px;
+}
+
+header h1{
+    float: left;
+    display: inline-block;
+    border: 0px;
+}
