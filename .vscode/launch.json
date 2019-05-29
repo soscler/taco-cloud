@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TacoCloudApplication",
+            "request": "launch",
+            "mainClass": "com.chrisssanti.tacocloud.TacoCloudApplication",
+            "projectName": "taco-cloud"
+        }
+    ]
+}

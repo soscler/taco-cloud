@@ -22,8 +22,9 @@
         <div th:class="grid">
             <div class="ingredient-group", id="wrap">
                 <h3>Design your wrap:</h3>
-                <div th:each="ingredient : ${wrap}">
-                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}" th:checked="${design.ingredients.contains(ingredient.id)}"/>
+                <div th:each="ingredient : ${wrap}"><!--fetch the ingredient, recal that in the model we put the ingredients in the model as dictionnary-->
+                    <!--input name="ingredients" type="checkbox" th:value="${ingredient.id}" /-->
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
                     <!--Add a label, default Ingredient-->
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
@@ -31,7 +32,7 @@
             <div class="ingredient-group", id="protein">
                 <h3>Pick your protein:</h3>
                 <div th:each="ingredient : ${protein}">
-                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}" th:checked="${design.ingredients.contains(ingredient.id)}"/>
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
                     <!--Add a label, default Ingredient-->
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
@@ -40,7 +41,7 @@
             <div class="ingredient-group", id="cheese">
                 <h3>Choose your cheese:</h3>
                 <div th:each="ingredient : ${cheese}">
-                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}" th:checked="${design.ingredients.contains(ingredient.id)}"/>
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
                     <!--Add a label, default Ingredient-->
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
@@ -48,7 +49,7 @@
             <div class="ingredient-group", id="veggies">
                 <h3>Determine your veggies:</h3>
                 <div th:each="ingredient : ${veggies}">
-                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}" th:checked="${design.ingredients.contains(ingredient.id)}"/>
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
                     <!--Add a label, default Ingredient-->
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
@@ -56,7 +57,7 @@
             <div class="ingredient-group", id="sauce">
                 <h3>Determine your sauce:</h3>
                 <div th:each="ingredient : ${sauce}">
-                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}" th:checked="${design.ingredients.contains(ingredient.id)}"/>
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
                     <!--Add a label, default Ingredient-->
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
@@ -64,10 +65,10 @@
         </div>
         <div>
             <h3>Name your taco creation</h3>
-            <input type="text" th:field="*{name}" />
-            <!--span class="ValidationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"> Name Error</span-->
+            <input type="text" th:field="*{name}"/>
+            <span class="ValidationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"> Name Error</span>
             <br/>
-            
+
             <button id="submit-design-button">Submit your taco</button>
         </div>
 

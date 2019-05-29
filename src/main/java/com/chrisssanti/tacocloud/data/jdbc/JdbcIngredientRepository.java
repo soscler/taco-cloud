@@ -1,4 +1,4 @@
-package com.chrisssanti.tacocloud.data;
+package com.chrisssanti.tacocloud.data.jdbc;
 
 import com.chrisssanti.tacocloud.model.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;

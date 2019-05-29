@@ -1,8 +1,6 @@
-package com.chrisssanti.tacocloud.data;
+package com.chrisssanti.tacocloud.data.jdbc;
 
 import com.chrisssanti.tacocloud.model.Ingredient;
-
-import java.util.List;
 
 public interface IngredientRepository {
 
