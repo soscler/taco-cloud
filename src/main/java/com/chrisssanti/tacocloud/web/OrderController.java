@@ -2,9 +2,11 @@ package com.chrisssanti.tacocloud.web;
 
 import com.chrisssanti.tacocloud.data.jpa.OrderRepository;
 import com.chrisssanti.tacocloud.model.Order;
+import com.chrisssanti.tacocloud.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,10 +36,12 @@ public class OrderController {
     }
 
     @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus) {
+    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus, @AuthenticationPrincipal User user) {
         if (errors.hasErrors()) {
             return "orderForm";
         }
+        // link the user who created the order to the order
+        order.setUser(user);
         orderRepository.save(order);
         log.info("Saved order: {}", order);
         sessionStatus.setComplete();

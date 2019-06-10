@@ -1,4 +1,4 @@
-package com.chrisssanti.tacocloud.web;
+package com.chrisssanti.tacocloud.security;
 
 
 import com.chrisssanti.tacocloud.Utils.RegistrationForm;
