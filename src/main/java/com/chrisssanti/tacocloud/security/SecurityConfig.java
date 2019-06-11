@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +16,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    //Since we have a service for fetching user information, we can use this same service for authentication
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     //in memory users authentication
     /*@Override
@@ -62,9 +68,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     }*/
 
-    //Since we have a service for fetching user information, we can use this same service for authentication
-    @Autowired
-    private UserDetailsService userDetailsService;
 
     /*
     * The password encoder could also be a bcryptEncoder
@@ -90,6 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     * and() is a bridge to say, hey I am done with something let do something else
     * The order is important, the security first (design, orders), then the low secure
     * */
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
     http
       .authorizeRequests()

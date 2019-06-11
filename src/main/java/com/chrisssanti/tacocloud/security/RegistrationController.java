@@ -1,6 +1,5 @@
 package com.chrisssanti.tacocloud.security;
 
-
 import com.chrisssanti.tacocloud.Utils.RegistrationForm;
 import com.chrisssanti.tacocloud.data.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,26 +9,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
-    private UserRepository userRepository;
+
+    private UserRepository userRepo;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder){
-        this.userRepository = userRepository;
+    public RegistrationController(
+            UserRepository userRepo, PasswordEncoder passwordEncoder) {
+        this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
-    public String registerForm(){
+    public String registerForm() {
         return "registration";
     }
 
     @PostMapping
-    public String processRegistration(RegistrationForm form){
-        userRepository.save(form.toUser(passwordEncoder));
+    public String processRegistration(RegistrationForm form) {
+        userRepo.save(form.toUser(passwordEncoder));
         return "redirect:/login";
     }
+
 }
