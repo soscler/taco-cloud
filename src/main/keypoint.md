@@ -1,5 +1,10 @@
 # key points
 
+## Spring
+
+Spring offers a container often referred as Spring Application Context that creates, and manages application components.
+These components are called `beans` and are wired together inside the spring application context to complete the application. 
+
 ## MVC:
 
 - Model
