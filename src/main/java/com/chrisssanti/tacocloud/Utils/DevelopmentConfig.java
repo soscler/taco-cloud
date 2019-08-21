@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @Profile("!prod")
 public class DevelopmentConfig {
+
     @Bean
     public CommandLineRunner dataLoader(IngredientRepository repo,
                                         UserRepository userRepo, PasswordEncoder encoder) { // user repo for ease of testing with a built-in user
@@ -33,8 +34,8 @@ public class DevelopmentConfig {
                 repo.save(new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
 
 
-                userRepo.save(new User("habuma", encoder.encode("password"),
-                        "Craig Walls", "123 North Street", "Cross Roads", "TX",
+                userRepo.save(new User("root", encoder.encode("root"),
+                        "Chriss Santi", "123 North Street", "Cross Roads", "TX",
                         "76227", "123-123-1234"));
             }
         };

@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/register")
 public class RegistrationController {
 
-    private UserRepository userRepo;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepo;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public RegistrationController(
-            UserRepository userRepo, PasswordEncoder passwordEncoder) {
+    public RegistrationController( UserRepository userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }

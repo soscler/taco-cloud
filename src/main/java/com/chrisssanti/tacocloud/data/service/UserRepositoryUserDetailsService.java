@@ -4,8 +4,7 @@ import com.chrisssanti.tacocloud.data.jpa.UserRepository;
 import com.chrisssanti.tacocloud.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.
-        UserDetailsService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.
         UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,12 @@ public class UserRepositoryUserDetailsService
         this.userRepo = userRepo;
     }
 
+    /**
+     * Fetch a user by the username
+     * @param username
+     * @return a the user @param username
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
@@ -30,7 +35,7 @@ public class UserRepositoryUserDetailsService
             return user;
         }
         throw new UsernameNotFoundException(
-                "User '" + username + "' not found");
+                "Cannot find the user '" + username);
     }
 
 }

@@ -1,5 +1,9 @@
 package com.chrisssanti.tacocloud.model;
 
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import javax.persistence.*;
@@ -10,10 +14,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
+@Data
 @Entity
 @Table(name = "Taco_Order")
+@RequiredArgsConstructor
+//@NoArgsConstructor(access= AccessLevel.PRIVATE, force=true)
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,14 +61,6 @@ public class Order implements Serializable {
     @ManyToOne
     private User user;
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @PrePersist
     void placedAt(){
         this.placedAt = new Date();
@@ -70,98 +68,5 @@ public class Order implements Serializable {
 
     public void addDesign(Taco design){
         this.tacos.add(design);
-    }
-
-    /**************************************/
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public List<Taco> getTacos() {
-        return tacos;
-    }
-
-    public void setTacos(List<Taco> tacos) {
-        this.tacos = tacos;
-    }
-
-    public Date getPlacedAt() {
-        return placedAt;
-    }
-
-    public void setPlacedAt(Date placedAt) {
-        this.placedAt = placedAt;
-    }
-
-    public String getDeliveryName() {
-        return deliveryName;
-    }
-
-    public void setDeliveryName(String deliveryName) {
-        this.deliveryName = deliveryName;
-    }
-
-    public String getDeliveryStreet() {
-        return deliveryStreet;
-    }
-
-    public void setDeliveryStreet(String deliveryStreet) {
-        this.deliveryStreet = deliveryStreet;
-    }
-
-    public String getDeliveryCity() {
-        return deliveryCity;
-    }
-
-    public void setDeliveryCity(String deliveryCity) {
-        this.deliveryCity = deliveryCity;
-    }
-
-    public String getDeliveryState() {
-        return deliveryState;
-    }
-
-    public void setDeliveryState(String deliveryState) {
-        this.deliveryState = deliveryState;
-    }
-
-    public String getDeliveryZip() {
-        return deliveryZip;
-    }
-
-    public void setDeliveryZip(String deliveryZip) {
-        this.deliveryZip = deliveryZip;
-    }
-
-    public String getCcNumber() {
-        return ccNumber;
-    }
-
-    public void setCcNumber(String ccNumber) {
-        this.ccNumber = ccNumber;
-    }
-
-    public String getCcExpiration() {
-        return ccExpiration;
-    }
-
-    public void setCcExpiration(String ccExpiration) {
-        this.ccExpiration = ccExpiration;
-    }
-
-    public String getCcCVV() {
-        return ccCVV;
-    }
-
-    public void setCcCVV(String ccCVV) {
-        this.ccCVV = ccCVV;
     }
 }

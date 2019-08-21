@@ -1,6 +1,9 @@
 package com.chrisssanti.tacocloud.model;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,10 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Objects;
 
-@Entity
 @Data
+@Entity
+//@NoArgsConstructor(access = AccessLevel.PRIVATE, force=true)
+@RequiredArgsConstructor
 public class User implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -76,5 +80,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
-
 }

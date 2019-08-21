@@ -4,7 +4,7 @@ import com.chrisssanti.tacocloud.model.User;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
+@Data
 public class RegistrationForm {
 
     private String username;
@@ -14,10 +14,10 @@ public class RegistrationForm {
     private String city;
     private String state;
     private String zip;
-    private String phone;
+    private String phoneNumber;
 
     public User toUser(PasswordEncoder passwordEncoder){
         return new User(username, passwordEncoder.encode(password),
-                fullname, street, city, state, zip, phone);
+                fullname, street, city, state, zip, phoneNumber);
     }
 }
