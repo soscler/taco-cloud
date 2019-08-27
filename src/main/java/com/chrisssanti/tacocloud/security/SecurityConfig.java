@@ -1,13 +1,17 @@
 package com.chrisssanti.tacocloud.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web
+        .configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web
+        .configuration.WebSecurityConfigurerAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation
+        .authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web
+        .builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,27 +26,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //Since we have a service for fetching user information, we can use this same service for authentication
 
+    @Qualifier("userRepositoryUserDetailsService")
+    @Autowired
     private UserDetailsService userDetailsService;
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return userDetailsService;
-    }
-
-    @Autowired
-    SecurityConfig(UserDetailsService userDetailsService){
-        this.userDetailsService = userDetailsService;
-    }
 
 
-    /**
-     * The password encoder could also be a bcryptEncoder
-     * @return
-     */
-    @Bean
-    public PasswordEncoder encoder(){
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
 
     /**
      * Used for a user authentication
@@ -52,9 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
+
         auth
-                .userDetailsService(userDetailsService())
+                .userDetailsService(userDetailsService)
                 .passwordEncoder(encoder());
+
     }
 
     /**
@@ -66,15 +57,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
     http
       .authorizeRequests()
         .antMatchers("/design", "/orders")
           .access("hasRole('ROLE_USER')")
-        .antMatchers("/" , "/**").access("permitAll")
+        .antMatchers( "/**").access("permitAll")
 
       .and()
         .formLogin()
           .loginPage("/login")
+            .failureUrl("/login?error")
             .defaultSuccessUrl("/design")
 
       .and()
@@ -92,4 +85,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .sameOrigin()
       ;
   }
+
+    /**
+     * The password encoder could also be a bcryptEncoder
+     * @return
+     */
+    @Bean
+    public PasswordEncoder encoder(){
+        //return new StandardPasswordEncoder("53cr3t");
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 }

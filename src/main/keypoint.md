@@ -138,3 +138,56 @@ protected void configure(HttpSecurity http) throws Exception {
 **Custom Login page**
 
 By default Spring listen to `/login`, however one can customize it.
+The customization still uses the http security object passed to the configuration method overwritten from the WebSecurityConfigurerAdapter
+```java
+.and()
+        .formLogin()
+          .loginPage("/login")
+```
+----
+
+## Knowing your users
+
+When we create a web app it's important at some point to have some information concerning the user that is logged in
+This information can for example be used to improve the user experience in the app, or it can be used to execute more business activities.
+
+Different ways allow us to do so.
+
+> In fact when we deal with security, we have an interaction of objects
+> A request to access B: A is a Subject and B is an Object
+> In this same way there is an hierarchy for the Subject:
+> Subject --> Principal --> User [to know more](https://stackoverflow.com/questions/4989063/what-is-the-meaning-and-difference-between-subject-user-and-principal)
+> The information can be fetched by looking at the objects that are linked to the security context existing in the application
+>
+* Inject a Principal object into the controller method
+* Inject an Authentication object into the controller method
+* Use SecurityContextHolder to get at the security context
+* Use an @AuthenticationPrincipal annotated method
+
+We will talk about two of them
+
+The easiest way probably is by using an @AuthenticationPrincipal annotation
+
+```java
+@PostMapping
+public String processOrder(@Valid Order order, Errors errors, 
+SessionStatus sessionStatus,
+@AuthenticationPrincipal User user) {
+    if (errors.hasErrors()) {
+        return "orderForm";
+    }
+    order.setUser(user);
+    orderRepo.save(order);
+    sessionStatus.setComplete();
+    return "redirect:/";
+}
+``` 
+Here the security related code is only put at the annotation
+
+The other way is more general that it can be used anywhere in the code, not only in a controller method
+It uses the security context directly to fetch the object. Note that the returned object is of type `Object` so 
+we need to cast it to the expected object, here `User`
+```java
+Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+User user = (User) authentication.getPrincipal();
+```

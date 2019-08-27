@@ -1,0 +1,32 @@
+# Production ready configuration properties
+
+server:
+  port: 8443
+  ssl:
+    key-store: file:////home/chriss/Desktop/Projects/taco-cloud/src/main/resources/mykeys.jks
+    key-store-password: password
+    key-password: password
+
+spring:
+
+  datasource:
+    url: jdbc:mysql://localhost/tacocloud;IFEXISTS=FALSE
+    username: tacouser
+    password: tacopassword
+  #    schema:
+  #      - order-schema.sql
+  #      - ingredient-schema.sql
+  #      - taco-schema.sql
+  #      - user-schema.sql
+  #    data:
+  #      - ingredients.sql
+
+
+logging:
+  level:
+    root: WARN
+  #  path: /var/logs
+  #  file: tacocloud.log
+
+
+

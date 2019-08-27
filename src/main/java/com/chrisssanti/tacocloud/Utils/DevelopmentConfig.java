@@ -1,19 +1,18 @@
-package com.chrisssanti.tacocloud.Utils;
+package com.chrisssanti.tacocloud.Utils ;
 
-
-import com.chrisssanti.tacocloud.data.jpa.IngredientRepository;
-import com.chrisssanti.tacocloud.data.jpa.UserRepository;
-import com.chrisssanti.tacocloud.model.Ingredient;
-import com.chrisssanti.tacocloud.model.Ingredient.*;
-import com.chrisssanti.tacocloud.model.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import com.chrisssanti.tacocloud.model.Ingredient.Type;
+import com.chrisssanti.tacocloud.data.jpa.IngredientRepository;
+import com.chrisssanti.tacocloud.data.jpa.UserRepository;
+import com.chrisssanti.tacocloud.model.User;
+import com.chrisssanti.tacocloud.model.Ingredient;
 
-@Configuration
 @Profile("!prod")
+@Configuration
 public class DevelopmentConfig {
 
     @Bean
@@ -35,7 +34,7 @@ public class DevelopmentConfig {
 
 
                 userRepo.save(new User("root", encoder.encode("root"),
-                        "Chriss Santi", "123 North Street", "Cross Roads", "TX",
+                        "Craig Walls", "123 North Street", "Cross Roads", "TX",
                         "76227", "123-123-1234"));
             }
         };

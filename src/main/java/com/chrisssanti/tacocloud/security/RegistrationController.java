@@ -17,8 +17,9 @@ public class RegistrationController {
     private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public RegistrationController( UserRepository userRepo, PasswordEncoder passwordEncoder) {
+    //@Autowired
+    public RegistrationController(
+            UserRepository userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
@@ -30,6 +31,7 @@ public class RegistrationController {
 
     @PostMapping
     public String processRegistration(RegistrationForm form) {
+        System.out.println(form.toString());
         userRepo.save(form.toUser(passwordEncoder));
         return "redirect:/login";
     }
