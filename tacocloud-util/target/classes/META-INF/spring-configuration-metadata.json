@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "taco.discount",
+      "type": "tacos.web.DiscountCodeProps",
+      "sourceType": "tacos.web.DiscountCodeProps"
+    }
+  ],
+  "properties": [
+    {
+      "name": "taco.discount.codes",
+      "type": "java.util.Map<java.lang.String,java.lang.Integer>",
+      "sourceType": "tacos.web.DiscountCodeProps"
+    }
+  ],
+  "hints": []
+}

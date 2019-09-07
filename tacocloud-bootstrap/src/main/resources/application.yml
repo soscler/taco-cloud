@@ -1,0 +1,11 @@
+# Common configuration properties
+
+taco:
+  orders:
+    pageSize: 10
+
+  discount:
+    codes:
+      abcdef: 10
+
+
